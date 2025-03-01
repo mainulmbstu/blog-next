@@ -1,6 +1,5 @@
 "use client";
 
-import { registerAction } from "./registerAction";
 import SubmitButton from "@/lib/components/SubmitButton";
 import Form from "next/form";
 import toast from "react-hot-toast";
