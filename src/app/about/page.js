@@ -13,7 +13,8 @@ const About = () => {
   // });
   return (
     <div className="">
-      <CldUploadWidget
+    <h2>About</h2>
+      {/* <CldUploadWidget
         uploadPreset="preset1"
         onSuccess={({ event, info }) => {
           if (event === "success") {
@@ -28,7 +29,7 @@ const About = () => {
             </button>
           );
         }}
-      </CldUploadWidget>
+      </CldUploadWidget> */}
     </div>
   );
 };
