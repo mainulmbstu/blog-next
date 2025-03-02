@@ -31,7 +31,7 @@ const CreatePost = () => {
   };
 
   return (
-    <div className=" grid grid-cols-2">
+    <div className=" grid md:grid-cols-2">
       <div className="p-3">
         <Image
           priority={true}
@@ -66,7 +66,7 @@ const CreatePost = () => {
               Title
             </label>
             <input
-              className="input"
+              className="input bg-white"
               type="text"
               id="title"
               name="title"
