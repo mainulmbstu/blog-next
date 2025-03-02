@@ -147,8 +147,8 @@ const PostDetails = async ({ params }) => {
                       className=" object-contain w-10 h-auto rounded-full me-3"
                       src={postDetails?.user?.picture?.secure_url}
                       alt=""
-                      width={0}
-                      height={0}
+                      width={100}
+                      height={100}
                     />{" "}
                   </Link>{" "}
                   <span className="mt-3">{postDetails?.user?.name} </span>

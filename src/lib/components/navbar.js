@@ -219,8 +219,6 @@ const Navbar = () => {
                       }
                       alt="image"
                       className=" rounded-full w-12 object-contain"
-                      // height={"100px"}
-                      // width={"100px"}
                     />
                     {userInfo?.name}
                   </summary>
