@@ -15,7 +15,7 @@ const Navbar = () => {
   let path = usePathname();
   // console.log(path);
   return (
-    <div className="navbar bg-base-100 shadow-lg fixed z-50 h-[6vh]">
+    <div className="navbar bg-base-300 shadow-lg fixed z-50 h-[6vh]">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
