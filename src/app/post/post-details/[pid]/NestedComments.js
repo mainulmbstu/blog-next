@@ -32,8 +32,8 @@ const NestedComments = ({ pid, allComments }) => {
                   className=" object-contain w-10 h-auto me-3"
                   src={v?.user?.picture?.secure_url}
                   alt=""
-                  width={0}
-                  height={0}
+                  width={100}
+                  height={100}
                 />{" "}
               </Link>{" "}
               <span className="mt-3">
