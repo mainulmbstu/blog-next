@@ -66,11 +66,12 @@ const CreatePost = () => {
               Title
             </label>
             <input
-              className="input bg-white"
+              className=""
               type="text"
               id="title"
               name="title"
               required
+              placeholder="Enter post title"
             />
           </div>
           <div>
