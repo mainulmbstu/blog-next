@@ -20,6 +20,7 @@ import NestedComments from "./NestedComments";
 import CommentModalNormal from "./commentModalNormal";
 import DeleteModal from "@/lib/components/DeleteModal";
 import EditCommentModal from "./editCommentModal";
+import { getTokenData } from "@/lib/helpers/getTokenData";
 
 export const generateMetadata = async ({ searchParams }) => {
   let { title, post } = await searchParams;
@@ -44,7 +45,7 @@ export const generateMetadata = async ({ searchParams }) => {
 const PostDetails = async ({ params }) => {
   // console.log(search);
   let { pid } = await params;
-  let userInfo = await getCookieValue("userInfo");
+  let userInfo = await getTokenData(await getCookieValue("token"));
   let { postDetails, similarPosts } = await postDetailsAction(pid);
   let blurData = await getBase64(postDetails?.picture?.secure_url);
   let blurDataAuthor = await getBase64(postDetails?.user?.picture?.secure_url);
