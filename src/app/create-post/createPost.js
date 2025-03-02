@@ -66,12 +66,12 @@ const CreatePost = () => {
               Title
             </label>
             <input
-              className="input bg-white"
+              className="input"
               type="text"
               id="title"
               name="title"
               required
-              placeholder="Enter post title"
+              placeholder="Enter post itle"
             />
           </div>
           <div>
@@ -101,7 +101,7 @@ const CreatePost = () => {
               Post
             </label>
             <textarea
-              className=" w-full min-h-12 bg-white p-2 border-0"
+              className=" w-full min-h-12 p-2 border-0"
               type="text"
               name="post"
               // value={inputval.post}
