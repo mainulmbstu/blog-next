@@ -4,31 +4,29 @@
 
 @theme {
   --text-tiny: 0.625rem;
-  --text-tiny--line-height: 1.5rem; 
-  --text-tiny--letter-spacing: 0.125rem; 
-  --text-tiny--font-weight: 500; 
+  --text-tiny--line-height: 1.5rem;
+  --text-tiny--letter-spacing: 0.125rem;
+  --text-tiny--font-weight: 500;
 }
 @theme {
   --test-400: #ffad00;
-
 }
-.bg-test{
+.bg-test {
   background-color: var(--test-400);
 }
 @utility black-theme {
-   background-color: rgb(0, 0, 0);
-    color: #ffffff;
-
+  background-color: rgb(0, 0, 0);
+  color: #ffffff;
 }
 /* working */
- @utility card {
-    background-color: #e6e6e6;
-    /* background-color: var(--color-gray); */
-    border-radius: var(--rounded-lg);
-    padding: 10px;
-    box-shadow: var(--shadow-xl);
-    color: #0a0a0a;
-  }
+@utility card {
+  background-color: #e6e6e6;
+  /* background-color: var(--color-gray); */
+  border-radius: var(--rounded-lg);
+  padding: 10px;
+  box-shadow: var(--shadow-xl);
+  color: #0a0a0a;
+}
 /* 
 @layer components {
   .card {
@@ -52,8 +50,9 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #dd0a0a;
     --foreground: #ededed;
+    --color: white;
   }
 }
 
@@ -63,45 +62,43 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-h1{
-  font-size: 2em ;
+h1 {
+  font-size: 2em;
   font-weight: bold;
 }
-h2{
-  font-size: 1.5em ;
+h2 {
+  font-size: 1.5em;
   font-weight: bold;
 }
-h3{
-  font-size: 1.17em ;
+h3 {
+  font-size: 1.17em;
   font-weight: bold;
 }
-h4{
-  font-size: 1.33em ;
+h4 {
+  font-size: 1.33em;
   font-weight: bold;
 }
-h5{
-  font-size: 0.83em ;
+h5 {
+  font-size: 0.83em;
   font-weight: bold;
 }
-h6{
-  font-size: 0.67em ;
+h6 {
+  font-size: 0.67em;
   font-weight: bold;
 }
-hr{
+hr {
   margin: 12px 0;
 }
-input:focus{
+input:focus {
   outline-width: 0;
   border-color: #df5d5d;
 }
 
-input{
+input {
   width: 100%;
 }
 
-th{
-font-weight:bolder;
-background-color: aquamarine;
+th {
+  font-weight: bolder;
+  background-color: aquamarine;
 }
-
-

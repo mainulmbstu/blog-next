@@ -66,7 +66,7 @@ const CreatePost = () => {
               Title
             </label>
             <input
-              className=" bg-transparent"
+              className="input bg-white"
               type="text"
               id="title"
               name="title"
