@@ -94,7 +94,9 @@ input:focus {
   border-color: #df5d5d;
 }
 
-input {
+input,
+textarea,
+select {
   width: 100%;
   background-color: white;
 }

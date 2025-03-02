@@ -82,7 +82,7 @@ const CreatePost = () => {
               // onChange={(e) => roleHandle(e.target.value, id)}
               // defaultValue={'Select Category'}
               name="category"
-              className="select w-full bg-white"
+              className="select w-full"
             >
               {category?.length &&
                 category.map((item) => (
