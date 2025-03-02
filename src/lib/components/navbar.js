@@ -222,7 +222,10 @@ const Navbar = () => {
                     />
                     {userInfo?.name}
                   </summary>
-                  <ul style={{ marginTop: "10px" }} className="p-2 w-full ">
+                  <ul
+                    style={{ marginTop: "10px" }}
+                    className="p-2 w-full bg-base-200 "
+                  >
                     <li>
                       <Link
                         className={path === "/dashboard" ? "bg-zinc-200" : ""}
