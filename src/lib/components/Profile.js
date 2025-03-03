@@ -30,8 +30,8 @@ const Profile = () => {
   };
 
   return (
-    <div className=" h-[93vh] grid place-items-center black-theme">
-      <Form action={clientAction} className=" p-4 md:w-3/5 lg:w-4/10 card">
+    <div className=" grid place-items-center black-theme">
+      <Form action={clientAction} className=" p-4 md:w-3/5  lg:w-4/10 card">
         <div>
           <Image priority={true} src={profileImage} alt="" />
         </div>
@@ -124,6 +124,7 @@ const Profile = () => {
           <div>
             <p>Current Image</p>
             <Image
+              priority={true}
               width={400}
               height={404}
               // src={'/adds.jpeg'}
@@ -139,7 +140,7 @@ const Profile = () => {
             />
           </div>
         </div>
-        <div className="mt-3">
+        <div className="">
           <SubmitButton title={"Update Profile"} />
         </div>
       </Form>
