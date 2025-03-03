@@ -68,7 +68,7 @@ export default function RootLayout({ children }) {
           {/* <Navbar /> */}
           <NavMenu />
           <Offline />
-          <div className="pt-[7vh]  flex  flex-col min-h-[100vh]">
+          <div className="pt-16  flex  flex-col min-h-[100vh]">
             <div>{children}</div>
             <div className=" mt-auto">
               <Footer />

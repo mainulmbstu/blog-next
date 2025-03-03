@@ -8,12 +8,11 @@ import { IoIosArrowDown } from "react-icons/io";
 
 const NavMenu = () => {
   const [isMenuOpen, setisMenuOpen] = useState(false);
-  const [isSubMenu, setisSubMenu] = useState(false);
 
   let menuClose = () => setisMenuOpen(false);
 
   return (
-    <div className=" flex  justify-between md:items-center p-4  bg-zinc-200">
+    <div className="fixed top-0 w-full z-10 shadow-lg flex  justify-between md:items-center p-4  bg-zinc-200">
       <div className="">logo</div>
       <div
         className={`h-6  transition-all  duration-500 ${
