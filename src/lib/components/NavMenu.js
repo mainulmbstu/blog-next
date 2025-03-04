@@ -8,8 +8,11 @@ import { IoIosArrowDown } from "react-icons/io";
 
 const NavMenu = () => {
   const [isMenuOpen, setisMenuOpen] = useState(false);
+<<<<<<< HEAD
   const [drop1, setdrop1] = useState(false);
   const [drop2, setdrop2] = useState(false);
+=======
+>>>>>>> 32dfbc5ade7de8d241e35db57708931d21ae4408
 
   let menuClose = () => setisMenuOpen(false);
 
@@ -40,6 +43,7 @@ const NavMenu = () => {
               </Link>
             </li>
 
+<<<<<<< HEAD
             <li
               onClick={() => setdrop1(!drop1)}
               className=" relative group  border-b-1 border-b-zinc-50 hover:inset-shadow-sm  py-2 hover:inset-shadow-indigo-300 transition-all"
@@ -49,10 +53,19 @@ const NavMenu = () => {
                   dropdown
                   <IoIosArrowDown
                     className={`mt-1 ${drop1 ? "rotate-180" : ""}`}
+=======
+            <li className=" relative group  border-b-1 border-b-zinc-50 hover:inset-shadow-sm  py-2 hover:inset-shadow-indigo-300 transition-all">
+              <Link href={"#"}>
+                <span className="group flex justify-center gap-1">
+                  dropdown
+                  <IoIosArrowDown
+                    className={" mt-1 group-hover:rotate-180"}
+>>>>>>> 32dfbc5ade7de8d241e35db57708931d21ae4408
                   />{" "}
                 </span>
               </Link>
               <ul
+<<<<<<< HEAD
                 className={`absolute top-full  md:right-0 bg-zinc-300 w-full md:w-fit whitespace-nowrap origin-top duration-300 ${
                   drop1 ? "scale-y-100" : "scale-y-0"
                 }`}
@@ -63,6 +76,17 @@ const NavMenu = () => {
                     onClick={menuClose}
                     href={"/about"}
                   >
+=======
+                className="absolute top-full  md:right-0 bg-zinc-300 w-full whitespace-nowrap scale-y-0 group-hover:scale-y-100 origin-top duration-300"
+                // className={
+                //   isSubMenu
+                //     ? "absolute top-9 md:right-0 bg-amber-300 w-fit whitespace-nowrap"
+                //     : "hidden"
+                // }
+              >
+                <li className="p-2 hover:bg-zinc-400">
+                  <Link onClick={menuClose} href={"/about"}>
+>>>>>>> 32dfbc5ade7de8d241e35db57708931d21ae4408
                     sub1 game and
                   </Link>
                 </li>
@@ -78,6 +102,7 @@ const NavMenu = () => {
                 About
               </Link>
             </li>
+<<<<<<< HEAD
             <li
               onClick={() => setdrop2(!drop2)}
               className=" relative group  border-b-1 border-b-zinc-50 hover:inset-shadow-sm  py-2 hover:inset-shadow-indigo-300 transition-all"
@@ -111,6 +136,8 @@ const NavMenu = () => {
                 </li>
               </ul>
             </li>
+=======
+>>>>>>> 32dfbc5ade7de8d241e35db57708931d21ae4408
           </ul>
         </nav>
       </div>
