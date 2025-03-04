@@ -12,7 +12,6 @@ export async function GET(req) {
   let perPage = 12;
   let skip = (page - 1) * perPage;
   let limit = page * perPage;
-  console.log(skip);
   try {
     await dbConnect();
     let author = await UserModel.find({

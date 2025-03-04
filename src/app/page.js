@@ -13,8 +13,8 @@ const Home = async ({ searchParams }) => {
   let page = Number((await spms["page"]) ?? "1");
   let perPage = Number((await spms["perPage"]) ?? "3");
   // let start=(Number(page)-1)*Number(perPage)
-  let start = (page - 1) * perPage;
-  let end = page * perPage;
+  // let start = (page - 1) * perPage;
+  // let end = page * perPage;
   // console.log(vvvvvv)
   // let userList = await userListAction(keyword);
   // let res = await fetch(

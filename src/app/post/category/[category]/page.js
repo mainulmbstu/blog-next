@@ -1,7 +1,7 @@
 // import { userListAction } from "./action";
 import Pagination from "@/lib/components/pagination";
-import { Axios } from "@/lib/helpers/helperFunction";
 import Card from "@/lib/components/postCard";
+import { Axios } from "@/lib/helpers/AxiosInstance";
 import { category } from "@/lib/helpers/categoryData";
 
 export const generateMetadata = async ({ searchParams }) => {
@@ -26,20 +26,24 @@ const CategoryPage = async ({ params, searchParams }) => {
   let end = page * perPage;
   // console.log(spms);
   // let userList = await userListAction(keyword);
-  let res = await fetch(
-    `${process.env.BASE_URL}/api/user/category?keyword=${category}`,
-    {
-      cache: "force-cache",
-    }
+  // let res = await fetch(
+  //   `${process.env.BASE_URL}/api/user/category?keyword=${category}`,
+  //   {
+  //     cache: "force-cache",
+  //   }
+  // );
+  let { data } = await Axios.get(
+    `/api/user/category?keyword=${category}&page=${page}`
   );
-  let postList = await res.json();
-  // let { data } = await axios.get(`https://jsonplaceholder.typicode.com/posts`);
-  let totalPage = Math.ceil(postList?.length / perPage);
-  let entries = postList?.slice(start, end);
+  let postList = data?.postList;
+  // let postList = await res.json();
+  let totalPage = data?.totalPage;
+  let entries = postList;
+  // let entries = postList?.slice(start, end);
   return (
     <div className="p-2">
       <h4>
-        Category Name: {categoryName} ({postList?.length}){" "}
+        Category Name: {categoryName} ({data?.total}){" "}
       </h4>
       <div className="grid md:grid-cols-4 gap-6">
         {entries?.length ? (
