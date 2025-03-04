@@ -76,7 +76,7 @@ const NavMenu = () => {
                 </span>
               </p>
               <ul
-                className={`absolute top-full z-30  md:right-0 bg-zinc-200 w-full md:w-fit whitespace-nowrap origin-top duration-300 ${
+                className={`absolute top-full z-30  md:left-0 bg-base-300 w-full md:w-fit whitespace-nowrap origin-top duration-300 ${
                   drop1 ? "scale-y-100" : "scale-y-0"
                 }`}
               >
@@ -107,14 +107,27 @@ const NavMenu = () => {
                   onClick={() => setdrop2(!drop2)}
                   className=" relative cursor-pointer  border-b-1 border-b-zinc-50 hover:inset-shadow-sm  py-2 md:py-0 hover:inset-shadow-indigo-300 transition-all"
                 >
+                  <span></span>
                   <span className=" flex justify-center gap-2">
+                    <Image
+                      priority={true}
+                      width={400}
+                      height={404}
+                      src={
+                        userInfo?.picture
+                          ? userInfo?.picture?.secure_url
+                          : "/dummy.jpeg"
+                      }
+                      alt="image"
+                      className=" rounded-full w-12 object-contain"
+                    />
                     {userInfo?.name}
                     <IoIosArrowDown
                       className={`mt-1 ${drop2 ? "rotate-180" : ""}`}
                     />{" "}
                   </span>
                   <ul
-                    className={`absolute top-full z-20  md:right-0 bg-zinc-200 w-full md:w-fit whitespace-nowrap origin-top duration-300 ${
+                    className={`absolute top-full z-20  md:right-0 bg-base-300 w-full md:w-fit whitespace-nowrap origin-top duration-300 ${
                       drop2 ? "scale-y-100" : "scale-y-0"
                     }`}
                   >
