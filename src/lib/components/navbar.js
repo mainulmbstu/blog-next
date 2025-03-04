@@ -45,6 +45,7 @@ const Navbar = () => {
                 Home
               </Link>
             </li>
+
             <li>
               <div className="dropdown dropdown-bottom">
                 <div tabIndex={0} role="button" className="">
@@ -160,6 +161,7 @@ const Navbar = () => {
               Home
             </Link>
           </li>
+
           <li>
             <div
               className={
@@ -244,7 +246,7 @@ const Navbar = () => {
                           Cookies.remove("token");
                           setUserInfo(null);
                           setToken(null);
-                          router.push("/user/login");
+                          router.refresh("/");
                         }}
                         className={path === "/user/login" ? "bg-zinc-200" : ""}
                       >

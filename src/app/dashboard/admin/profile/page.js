@@ -7,7 +7,7 @@ export const metadata = {
 };
 const AdminProfile = async () => {
   return (
-    <div>
+    <div className=" h-[93vh]">
       <Profile />
     </div>
   );

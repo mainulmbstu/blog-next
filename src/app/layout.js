@@ -5,6 +5,7 @@ import Offline from "@/lib/components/Offline";
 import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "@/lib/components/context";
 import Footer from "@/lib/components/Footer";
+import NavMenu from "@/lib/components/NavMenu";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -64,9 +65,10 @@ export default function RootLayout({ children }) {
               },
             }}
           />
-          <Navbar />
+          {/* <Navbar /> */}
+          <NavMenu />
           <Offline />
-          <div className="pt-[7vh]  flex  flex-col min-h-[100vh]">
+          <div className="pt-16  flex  flex-col min-h-[100vh]">
             <div>{children}</div>
             <div className=" mt-auto">
               <Footer />
