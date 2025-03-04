@@ -23,7 +23,7 @@ const NavMenu = () => {
   let path = usePathname();
 
   return (
-    <div className="fixed top-0 w-full z-10 shadow-lg flex  justify-between md:items-center p-4  bg-zinc-200">
+    <div className="fixed top-0 w-full z-10 shadow-lg flex  justify-between md:items-center p-4  bg-base-300">
       <div className="">logo</div>
       <div
         className={`h-6  transition-all  duration-500 ${
@@ -36,7 +36,7 @@ const NavMenu = () => {
               isMenuOpen
                 ? "flex flex-col scale-y-100 pt-12 text-center transition-all  duration-500"
                 : "scale-y-0"
-            } md:flex md:gap-4 md:scale-y-100`}
+            } md:flex md:gap-6 md:scale-y-100`}
           >
             <li className=" border-b-1 border-b-zinc-50 hover:inset-shadow-sm  py-2 md:py-0 hover:inset-shadow-indigo-300 transition-all">
               <Link
@@ -123,8 +123,8 @@ const NavMenu = () => {
                         onClick={menuClose}
                         className={
                           path.startsWith(`/dashboard`)
-                            ? "bg-zinc-400  w-full inline-block p-2 hover:bg-zinc-400"
-                            : "w-full inline-block p-2 hover:bg-zinc-400"
+                            ? "bg-zinc-300  w-full inline-block p-2 hover:bg-zinc-400 underline"
+                            : "w-full inline-block p-2 hover:bg-zinc-300"
                         }
                         href={
                           userInfo?.role === "admin"
@@ -144,7 +144,7 @@ const NavMenu = () => {
                           router.refresh("/");
                         }}
                         className={
-                          "w-full inline-block text-left p-2 hover:bg-zinc-400"
+                          "w-full inline-block md:text-left p-2 hover:bg-zinc-300 cursor-pointer"
                         }
                       >
                         Logout

@@ -30,7 +30,7 @@ const Profile = () => {
   };
 
   return (
-    <div className=" grid place-items-center black-theme">
+    <div className=" grid place-items-center h-full black-theme">
       <Form action={clientAction} className=" p-4 md:w-3/5  lg:w-4/10 card">
         <div>
           <Image priority={true} src={profileImage} alt="" />
