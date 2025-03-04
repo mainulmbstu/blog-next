@@ -40,8 +40,7 @@ const NavMenu = () => {
           >
             <li className=" border-b-1 border-b-zinc-50 hover:inset-shadow-sm  py-2 md:py-0 hover:inset-shadow-indigo-300 transition-all">
               <Link
-                // className={"bg-amber-500"}
-                className={path === "/" ? "underline text-lg" : ""}
+                className={path === "/" ? "underline text-blue-700" : ""}
                 onClick={menuClose}
                 href={"/"}
               >
@@ -49,82 +48,137 @@ const NavMenu = () => {
               </Link>
             </li>
             <li className=" border-b-1 border-b-zinc-50 hover:inset-shadow-sm  py-2 md:py-0 hover:inset-shadow-indigo-300 transition-all">
-              <Link onClick={menuClose} href={"/contact"}>
-                Contact
+              <Link
+                className={path === "/about" ? "underline text-blue-700" : ""}
+                onClick={menuClose}
+                href={"/about"}
+              >
+                About
               </Link>
             </li>
 
             <li
               onClick={() => setdrop1(!drop1)}
-              className=" relative group  border-b-1 border-b-zinc-50 hover:inset-shadow-sm  py-2 md:py-0 hover:inset-shadow-indigo-300 transition-all"
+              className=" relative cursor-pointer border-b-1 border-b-zinc-50 hover:inset-shadow-sm  py-2 md:py-0 hover:inset-shadow-indigo-300 transition-all"
             >
-              <Link href={"#"}>
+              <p
+                className={
+                  path.startsWith(`/post/category`)
+                    ? "underline text-blue-700"
+                    : ""
+                }
+              >
                 <span className=" flex justify-center gap-2">
-                  dropdown
+                  Category
                   <IoIosArrowDown
                     className={`mt-1 ${drop1 ? "rotate-180" : ""}`}
                   />{" "}
                 </span>
-              </Link>
+              </p>
               <ul
-                className={`absolute top-full z-20  md:right-0 bg-zinc-300 w-full md:w-fit whitespace-nowrap origin-top duration-300 ${
+                className={`absolute top-full z-30  md:right-0 bg-zinc-200 w-full md:w-fit whitespace-nowrap origin-top duration-300 ${
                   drop1 ? "scale-y-100" : "scale-y-0"
                 }`}
               >
-                <li className=" hover:bg-zinc-400">
-                  <Link
-                    className="p-2 inline-block"
-                    onClick={menuClose}
-                    href={"/about"}
-                  >
-                    sub1 game and
-                  </Link>
-                </li>
-                <li className="p-2 hover:bg-zinc-400">
-                  <Link onClick={menuClose} href={"/about"}>
-                    sub2
-                  </Link>
-                </li>
+                {category?.length &&
+                  category.map((item) => (
+                    <li className="" key={item.id}>
+                      <Link
+                        onClick={menuClose}
+                        className={
+                          path == `/post/category/${slugify(item.name)}`
+                            ? "bg-zinc-400  w-full inline-block p-2 hover:bg-zinc-400"
+                            : "w-full inline-block p-2 hover:bg-zinc-400"
+                        }
+                        href={`/post/category/${slugify(
+                          item.name
+                        )}?categoryName=${item.name}`}
+                      >
+                        {item.name}
+                      </Link>
+                    </li>
+                  ))}
               </ul>
             </li>
-            <li className=" border-b-1 border-b-zinc-50 hover:inset-shadow-sm  py-2 md:py-0 hover:inset-shadow-indigo-300 transition-all">
-              <Link onClick={menuClose} href={"/about"}>
-                About
-              </Link>
-            </li>
-            <li
-              onClick={() => setdrop2(!drop2)}
-              className=" relative group  border-b-1 border-b-zinc-50 hover:inset-shadow-sm  py-2 md:py-0 hover:inset-shadow-indigo-300 transition-all"
-            >
-              <Link href={"#"}>
-                <span className=" flex justify-center gap-2">
-                  dropdown2
-                  <IoIosArrowDown
-                    className={`mt-1 ${drop2 ? "rotate-180" : ""}`}
-                  />{" "}
-                </span>
-              </Link>
-              <ul
-                className={`absolute top-full z-20  md:right-0 bg-zinc-300 w-full md:w-fit whitespace-nowrap origin-top duration-300 ${
-                  drop2 ? "scale-y-100" : "scale-y-0"
-                }`}
-              >
-                <li className=" hover:bg-zinc-400">
-                  <Link
-                    className="p-2 inline-block"
-                    onClick={menuClose}
-                    href={"/about"}
+
+            {userInfo ? (
+              <>
+                <li
+                  onClick={() => setdrop2(!drop2)}
+                  className=" relative cursor-pointer  border-b-1 border-b-zinc-50 hover:inset-shadow-sm  py-2 md:py-0 hover:inset-shadow-indigo-300 transition-all"
+                >
+                  <span className=" flex justify-center gap-2">
+                    {userInfo?.name}
+                    <IoIosArrowDown
+                      className={`mt-1 ${drop2 ? "rotate-180" : ""}`}
+                    />{" "}
+                  </span>
+                  <ul
+                    className={`absolute top-full z-20  md:right-0 bg-zinc-200 w-full md:w-fit whitespace-nowrap origin-top duration-300 ${
+                      drop2 ? "scale-y-100" : "scale-y-0"
+                    }`}
                   >
-                    sub1 game and
+                    <li>
+                      <Link
+                        onClick={menuClose}
+                        className={
+                          path.startsWith(`/dashboard`)
+                            ? "bg-zinc-400  w-full inline-block p-2 hover:bg-zinc-400"
+                            : "w-full inline-block p-2 hover:bg-zinc-400"
+                        }
+                        href={
+                          userInfo?.role === "admin"
+                            ? "/dashboard/admin"
+                            : "/dashboard/user"
+                        }
+                      >
+                        Dashboard
+                      </Link>
+                    </li>
+                    <li>
+                      <button
+                        onClick={() => {
+                          Cookies.remove("token");
+                          setUserInfo(null);
+                          setToken(null);
+                          router.refresh("/");
+                        }}
+                        className={
+                          "w-full inline-block text-left p-2 hover:bg-zinc-400"
+                        }
+                      >
+                        Logout
+                      </button>
+                    </li>
+                  </ul>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className=" border-b-1 border-b-zinc-50 hover:inset-shadow-sm  py-2 md:py-0 hover:inset-shadow-indigo-300 transition-all">
+                  <Link
+                    className={
+                      path === "/user/login" ? "underline text-blue-700" : ""
+                    }
+                    onClick={menuClose}
+                    href={"/user/login"}
+                  >
+                    Login
                   </Link>
                 </li>
-                <li className="p-2 hover:bg-zinc-400">
-                  <Link onClick={menuClose} href={"/about"}>
-                    sub2
+                <li className=" border-b-1 border-b-zinc-50 hover:inset-shadow-sm  py-2 md:py-0 hover:inset-shadow-indigo-300 transition-all">
+                  <Link
+                    className={
+                      path === "/user/register" ? "underline text-blue-700" : ""
+                    }
+                    onClick={menuClose}
+                    href={"/user/register"}
+                  >
+                    Register
                   </Link>
                 </li>
-              </ul>
-            </li>
+              </>
+            )}
           </ul>
         </nav>
       </div>
