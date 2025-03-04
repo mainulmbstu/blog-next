@@ -29,9 +29,9 @@ export async function GET(req) {
       ],
     })
       .populate("user", "-password")
-      .sort({ createdAt: -1 })
       .skip(skip)
-      .limit(limit);
+      .limit(limit)
+      .sort({ createdAt: -1 });
     return Response.json({ postList, total, totalPage });
   } catch (error) {
     console.log(error);
