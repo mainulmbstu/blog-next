@@ -14,7 +14,7 @@ const Home = async ({ searchParams }) => {
   let spms = await searchParams;
   let keyword = (await spms["keyword"]) ?? "";
   let page = Number((await spms["page"]) ?? "1");
-  let perPage = Number((await spms["perPage"]) ?? "3");
+  let perPage = Number((await spms["perPage"]) ?? "12");
   // let start=(Number(page)-1)*Number(perPage)
   // let start = (page - 1) * perPage;
   // let end = page * perPage;
