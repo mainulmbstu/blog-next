@@ -6,6 +6,9 @@ import Link from "next/link";
 import Card from "@/lib/components/postCard";
 import PaginationButton from "@/lib/components/paginationButton";
 import { Axios } from "@/lib/helpers/AxiosInstance";
+import { allPostAction } from "./(backend)/api/user/all-posts/allPostAction";
+import Page1 from "./page1";
+import { Suspense } from "react";
 
 const Home = async ({ searchParams }) => {
   let spms = await searchParams;
@@ -24,10 +27,11 @@ const Home = async ({ searchParams }) => {
   //     // next: { revalidate: 10 },
   //   }
   // );
-  let { data } = await Axios.get(
-    `/api/user/all-posts?keyword=${keyword}&page=${page}`
-  );
-  let postList = data?.postList;
+  // let { data } = await Axios.get(
+  //   `/api/user/all-posts?keyword=${keyword}&page=${page}`
+  // );
+  // let data = await allPostAction(keyword);
+  // let postList = data?.postList;
   // let postList = await res.json();
 
   // let kkk = 22;
@@ -38,74 +42,78 @@ const Home = async ({ searchParams }) => {
   //   return kkk;
   // })();
   // console.log(await mmm);
-  let totalPage = data?.totalPage;
-  let entries = postList;
+  // let totalPage = data?.totalPage;
+  // let entries = postList;
   // console.log("test", kkk);
+
   return (
-    <div className="p-2">
-      <div>
-        <Link className="btn btn-primary" href={"/create-post"}>
-          Create Post
-        </Link>
-      </div>
-      <div className="my-3">
-        <Form action={"/"}>
-          <div className="join">
-            <div className="">
-              <input
-                name="keyword"
-                type="search"
-                className="input input-bordered join-item"
-                placeholder="Title or Author name"
-              />
-            </div>
-            <div className="">
-              <button className="btn join-item">Search</button>
-            </div>
-          </div>
-        </Form>
-      </div>
-      <h5>Total posts found {data?.total} </h5>
-      <div className=" grid md:grid-cols-4 gap-6">
-        {entries?.length ? (
-          entries.map((item) => (
-            <motion.div
-              key={item._id}
-              initial={{ y: 100, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{
-                delay: 0.5,
-                type: "spring",
-                stiffness: 100,
-              }}
-            >
-              <Card item={item} />
-            </motion.div>
-          ))
-        ) : (
-          <p>No data found</p>
-        )}
-      </div>
-      <div className=" mt-3 ">
-        <Pagination
-          totalPage={totalPage}
-          page={page}
-          perPage={perPage}
-          spms1="keyword"
-          spms1Value={keyword}
-        />{" "}
-      </div>
-      {/* <div className=" mt-3 ">
-        <PaginationButton
-          mmm={mmm}
-          totalPage={totalPage}
-          page={page}
-          perPage={perPage}
-          spms1="keyword"
-          spms1Value={keyword}
-        />{" "}
-      </div> */}
-    </div>
+    <Suspense fallback=<h3>loading home</h3>>
+      <Page1 keyword={keyword} page={page} perPage={perPage} />
+    </Suspense>
+    // <div className="p-2">
+    //   <div>
+    //     <Link className="btn btn-primary" href={"/create-post"}>
+    //       Create Post
+    //     </Link>
+    //   </div>
+    //   <div className="my-3">
+    //     <Form action={"/"}>
+    //       <div className="join">
+    //         <div className="">
+    //           <input
+    //             name="keyword"
+    //             type="search"
+    //             className="input input-bordered join-item"
+    //             placeholder="Title or Author name"
+    //           />
+    //         </div>
+    //         <div className="">
+    //           <button className="btn join-item">Search</button>
+    //         </div>
+    //       </div>
+    //     </Form>
+    //   </div>
+    //   <h5>Total posts found {data?.total} </h5>
+    //   <div className=" grid md:grid-cols-4 gap-6">
+    //     {entries?.length ? (
+    //       entries.map((item) => (
+    //         <motion.div
+    //           key={item._id}
+    //           initial={{ y: 100, opacity: 0 }}
+    //           whileInView={{ y: 0, opacity: 1 }}
+    //           transition={{
+    //             delay: 0.5,
+    //             type: "spring",
+    //             stiffness: 100,
+    //           }}
+    //         >
+    //           <Card item={item} />
+    //         </motion.div>
+    //       ))
+    //     ) : (
+    //       <p>No data found</p>
+    //     )}
+    //   </div>
+    //   <div className=" mt-3 ">
+    //     <Pagination
+    //       totalPage={totalPage}
+    //       page={page}
+    //       perPage={perPage}
+    //       spms1="keyword"
+    //       spms1Value={keyword}
+    //     />{" "}
+    //   </div>
+    //   {/* <div className=" mt-3 ">
+    //     <PaginationButton
+    //       mmm={mmm}
+    //       totalPage={totalPage}
+    //       page={page}
+    //       perPage={perPage}
+    //       spms1="keyword"
+    //       spms1Value={keyword}
+    //     />{" "}
+    //   </div> */}
+    // </div>
   );
 };
 

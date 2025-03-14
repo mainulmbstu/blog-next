@@ -13,6 +13,10 @@ export const getCookieValue = async (cookieName) => {
   return value;
 };
 
+export const wait = async (ms) => {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+};
+
 //===========================
 export const loginMiddleware = async (token) => {
   if (!token) {

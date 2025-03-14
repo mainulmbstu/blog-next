@@ -122,19 +122,17 @@ export const editPostAction = async (pid, formData) => {
   let post = formData.get("post");
   let file = formData.get("file");
 
-  let storePath = "";
   try {
     await dbConnect();
     const postExist = await PostModel.findById(pid);
     if (file?.size) {
       postExist.picture?.public_id &&
         (await deleteImageOnCloudinary(postExist.picture?.public_id));
-      let { filePath, secure_url, public_id } = await uploadOnCloudinary(
+      let {  secure_url, public_id } = await uploadOnCloudinary(
         file,
         "blognextpost"
       );
       postExist.picture = { secure_url, public_id };
-      storePath = filePath;
     }
     if (title) postExist.title = title;
     if (category) postExist.category = category;
@@ -147,7 +145,6 @@ export const editPostAction = async (pid, formData) => {
       message: `Post Updated successfully`,
     };
   } catch (error) {
-    file?.size && fs.unlinkSync(storePath);
     console.log(error);
     return { message: await getErrorMessage(error) };
   }

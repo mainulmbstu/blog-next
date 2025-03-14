@@ -1,18 +1,14 @@
-// export const dynamic = "force-static";
+"use server";
 
-import { NextRequest, NextResponse } from "next/server";
+import dbConnect from "@/lib/helpers/dbConnect";
 import { getErrorMessage } from "@/lib/helpers/getErrorMessage";
 import { PostModel } from "@/lib/models/PostModel";
 import { UserModel } from "@/lib/models/userModel";
-import dbConnect from "@/lib/helpers/dbConnect";
 
-export async function GET(req) {
-  console.log(2222222);
-  let keyword = req.nextUrl.searchParams.get("keyword");
-  let page = req.nextUrl.searchParams.get("page");
-  let perPage = 12;
+export const allPostAction = async (keyword, page = 1, perPage) => {
   let skip = (page - 1) * perPage;
   let limit = page * perPage;
+  console.log(skip, limit, perPage);
   try {
     await dbConnect();
     let author = await UserModel.find({
@@ -38,9 +34,9 @@ export async function GET(req) {
       .skip(skip)
       .limit(limit)
       .sort({ createdAt: -1 });
-    return Response.json({ postList, total: total?.length, totalPage });
+    return { postList, total: total?.length, totalPage };
   } catch (error) {
     console.log(error);
     return { message: await getErrorMessage(error) };
   }
-}
+};
