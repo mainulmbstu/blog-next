@@ -8,7 +8,7 @@ import { UserModel } from "@/lib/models/userModel";
 export const allPostAction = async (keyword, page = 1, perPage) => {
   let skip = (page - 1) * perPage;
   let limit = page * perPage;
-  console.log(skip, limit, perPage);
+  console.log(page, skip, limit);
   try {
     await dbConnect();
     let author = await UserModel.find({
@@ -32,8 +32,9 @@ export const allPostAction = async (keyword, page = 1, perPage) => {
     })
       .populate("user", "-password")
       .skip(skip)
-      .limit(limit)
+      .limit(perPage)
       .sort({ createdAt: -1 });
+    console.log(postList.length);
     return { postList, total: total?.length, totalPage };
   } catch (error) {
     console.log(error);

@@ -54,6 +54,7 @@ const Page1 = async ({ keyword, page, perPage }) => {
           <div className="join">
             <div className="">
               <input
+                defaultValue={keyword}
                 name="keyword"
                 type="search"
                 className="input input-bordered join-item"
