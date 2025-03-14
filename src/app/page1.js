@@ -39,7 +39,6 @@ const Page1 = async ({ keyword, page, perPage }) => {
   //   return kkk;
   // })();
   // console.log(await mmm);
-  let totalPage = data?.totalPage;
   let entries = postList;
   // console.log("test", kkk);
   return (
@@ -90,7 +89,7 @@ const Page1 = async ({ keyword, page, perPage }) => {
       </div>
       <div className=" mt-3 ">
         <Pagination
-          totalPage={totalPage}
+          total={data?.total}
           page={page}
           perPage={perPage}
           spms1="keyword"

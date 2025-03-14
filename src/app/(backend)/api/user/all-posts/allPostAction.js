@@ -21,7 +21,6 @@ export const allPostAction = async (keyword, page = 1, perPage) => {
         { user: authIdArr?.length && authIdArr },
       ],
     });
-    let totalPage = Math.ceil(total?.length / perPage);
     const postList = await PostModel.find({
       $or: [
         { title: { $regex: keyword, $options: "i" } },
@@ -33,7 +32,7 @@ export const allPostAction = async (keyword, page = 1, perPage) => {
       .skip(skip)
       .limit(perPage)
       .sort({ createdAt: -1 });
-    return { postList, total: total?.length, totalPage };
+    return { postList, total: total?.length };
   } catch (error) {
     console.log(error);
     return { message: await getErrorMessage(error) };

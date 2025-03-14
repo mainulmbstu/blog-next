@@ -20,10 +20,8 @@ const CategoryPage = async ({ params, searchParams }) => {
   let spms = await searchParams;
   let categoryName = (await spms["categoryName"]) ?? "";
   let page = Number((await spms["page"]) ?? "1");
-  let perPage = Number((await spms["perPage"]) ?? "30");
+  let perPage = Number((await spms["perPage"]) ?? "8");
   // let start=(Number(page)-1)*Number(perPage)
-  let start = (page - 1) * perPage;
-  let end = page * perPage;
   // console.log(spms);
   // let userList = await userListAction(keyword);
   // let res = await fetch(
@@ -33,11 +31,10 @@ const CategoryPage = async ({ params, searchParams }) => {
   //   }
   // );
   let { data } = await Axios.get(
-    `/api/user/category?keyword=${category}&page=${page}`
+    `/api/user/category?keyword=${category}&page=${page}&perPage=${perPage}`
   );
   let postList = data?.postList;
   // let postList = await res.json();
-  let totalPage = data?.totalPage;
   let entries = postList;
   // let entries = postList?.slice(start, end);
   return (
@@ -54,7 +51,7 @@ const CategoryPage = async ({ params, searchParams }) => {
       </div>
       <div className=" mt-3 ">
         <Pagination
-          totalPage={totalPage}
+          total={data?.total}
           page={page}
           perPage={perPage}
           spms1="categoryName"

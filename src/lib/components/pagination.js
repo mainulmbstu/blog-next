@@ -3,12 +3,13 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 
-const Pagination = ({ page, perPage, totalPage, spms1, spms1Value = "" }) => {
+const Pagination = ({ page, perPage, total, spms1, spms1Value = "" }) => {
   let router = useRouter();
   let path = usePathname();
   // let searchParams = useSearchParams();
   // let page = searchParams.get("page") ?? "1";
   //   let perPage = searchParams.get("perPage") ?? "3";
+  let totalPage = Math.ceil(total / perPage);
   let pageArr = Array.from({ length: totalPage }, (v, i) => i + 1);
   if (totalPage == 1) {
     return null;

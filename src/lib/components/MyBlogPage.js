@@ -3,27 +3,32 @@ import Card from "@/lib/components/postCard";
 import { getTokenData } from "@/lib/helpers/getTokenData";
 import { getCookieValue } from "@/lib/helpers/helperFunction";
 import { Axios } from "@/lib/helpers/AxiosInstance";
+import Pagination from "./pagination";
 
-const MyBlogPage = async () => {
+const MyBlogPage = async ({ searchParams }) => {
+  let spms = await searchParams;
+  // let keyword = (await spms["keyword"]) ?? "";
+  let page = Number((await spms["page"]) ?? "1");
+  let perPage = Number((await spms["perPage"]) ?? "12");
   let userInfo = await getTokenData(await getCookieValue("token"));
   let res = await fetch(
-    `${process.env.BASE_URL}/api/logged-user-posts?userId=${userInfo?._id}`,
-    {
-      cache: "force-cache",
-    }
+    `${process.env.BASE_URL}/api/logged-user-posts?userId=${userInfo?._id}&page=${page}&perPage=${perPage}`
+    // {
+    //   cache: "force-cache",
+    // }
   );
   // let { data } = await Axios.get(`/api/logged-user-posts`, {
   //   params: { userId: userInfo?._id },
   // });
-  let postList = await res.json();
+  let data = await res.json();
   // let postList = data;
   // console.log(data);
   // let { data } = await axios.get(`https://jsonplaceholder.typicode.com/posts`);
-  let entries = postList;
+  let entries = data?.postList;
   return (
     <div className="p-2">
       <h4>
-        Author Name: {userInfo?.name} ({postList?.length}){" "}
+        Author Name: {userInfo?.name} ({data?.total}){" "}
       </h4>
       <div className="grid md:grid-cols-4 gap-6">
         {entries?.length ? (
@@ -44,6 +49,9 @@ const MyBlogPage = async () => {
         ) : (
           <p>No data found</p>
         )}
+      </div>
+      <div className=" mt-3 ">
+        <Pagination total={data?.total} page={page} perPage={perPage} />{" "}
       </div>
     </div>
   );
