@@ -2,6 +2,7 @@ import * as motion from "motion/react-client";
 import Card from "@/lib/components/postCard";
 import { getTokenData } from "@/lib/helpers/getTokenData";
 import { getCookieValue } from "@/lib/helpers/helperFunction";
+import { Axios } from "@/lib/helpers/AxiosInstance";
 import Pagination from "./pagination";
 
 const MyBlogPage = async ({ searchParams }) => {
