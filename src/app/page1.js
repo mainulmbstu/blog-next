@@ -6,6 +6,7 @@ import Link from "next/link";
 import Card from "@/lib/components/postCard";
 import { Axios } from "@/lib/helpers/AxiosInstance";
 import { allPostAction } from "./(backend)/api/user/all-posts/allPostAction";
+import Loadmore from "@/lib/components/Loadmore";
 
 const Page1 = async ({ keyword, page, perPage }) => {
   //   let spms = await searchParams;
@@ -87,6 +88,13 @@ const Page1 = async ({ keyword, page, perPage }) => {
           <p>No data found</p>
         )}
       </div>
+      <Loadmore
+        total={data?.total}
+        page={page}
+        perPage={perPage}
+        spms1="keyword"
+        spms1Value={keyword}
+      />
       <div className=" mt-3 ">
         <Pagination
           total={data?.total}
