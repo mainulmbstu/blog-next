@@ -9,6 +9,7 @@ import { Axios } from "@/lib/helpers/AxiosInstance";
 import { allPostAction } from "./(backend)/api/user/all-posts/allPostAction";
 import Page1 from "./page1";
 import { Suspense } from "react";
+import Skeleton from "@/lib/components/Skeleton";
 
 const Home = async ({ searchParams }) => {
   let spms = await searchParams;
@@ -47,7 +48,7 @@ const Home = async ({ searchParams }) => {
   // console.log("test", kkk);
 
   return (
-    <Suspense fallback=<h3>loading home</h3>>
+    <Suspense fallback=<Skeleton />>
       <Page1 keyword={keyword} page={page} perPage={perPage} />
     </Suspense>
     // <div className="p-2">

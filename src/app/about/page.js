@@ -13,7 +13,7 @@ const About = () => {
   // });
   return (
     <div className="">
-    <h2>About</h2>
+      <h2>About</h2>
       {/* <CldUploadWidget
         uploadPreset="preset1"
         onSuccess={({ event, info }) => {
