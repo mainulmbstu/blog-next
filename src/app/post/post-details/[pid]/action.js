@@ -11,10 +11,20 @@ import { CommentModel } from "@/lib/models/CommentModel";
 import { LikeModel } from "@/lib/models/LikeModel";
 import { PostModel } from "@/lib/models/PostModel";
 import { revalidatePath } from "next/cache";
-import fs from "fs";
 import { getTokenData } from "@/lib/helpers/getTokenData";
 
 export const postDetailsAction = async (pid) => {
+  try {
+    await dbConnect();
+    const post = await PostModel.findById(pid).populate("user", "-password");
+    return { postDetails: post };
+  } catch (error) {
+    console.log(error);
+    return { message: await getErrorMessage(error) };
+  }
+};
+//===========================
+export const similarPostAction = async (pid) => {
   try {
     await dbConnect();
     const post = await PostModel.findById(pid).populate("user", "-password");
@@ -26,7 +36,7 @@ export const postDetailsAction = async (pid) => {
       .limit(12)
       .sort({ updatedAt: -1 });
 
-    return { postDetails: post, similarPosts };
+    return { similarPosts };
   } catch (error) {
     console.log(error);
     return { message: await getErrorMessage(error) };
@@ -128,7 +138,7 @@ export const editPostAction = async (pid, formData) => {
     if (file?.size) {
       postExist.picture?.public_id &&
         (await deleteImageOnCloudinary(postExist.picture?.public_id));
-      let {  secure_url, public_id } = await uploadOnCloudinary(
+      let { secure_url, public_id } = await uploadOnCloudinary(
         file,
         "blognextpost"
       );

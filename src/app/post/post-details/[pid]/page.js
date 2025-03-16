@@ -6,6 +6,7 @@ import {
   likeAction,
   likeStatusAction,
   postDetailsAction,
+  similarPostAction,
 } from "./action";
 import Link from "next/link";
 import { getCookieValue } from "@/lib/helpers/helperFunction";
@@ -21,6 +22,8 @@ import CommentModalNormal from "./commentModalNormal";
 import DeleteModal from "@/lib/components/DeleteModal";
 import EditCommentModal from "./editCommentModal";
 import { getTokenData } from "@/lib/helpers/getTokenData";
+import SimilarPosts from "./SimilarPosts";
+import NestedCommentData from "./NestedCommentData";
 
 export const generateMetadata = async ({ searchParams }) => {
   let { title, post } = await searchParams;
@@ -46,20 +49,12 @@ const PostDetails = async ({ params }) => {
   // console.log(search);
   let { pid } = await params;
   let userInfo = await getTokenData(await getCookieValue("token"));
-  let { postDetails, similarPosts } = await postDetailsAction(pid);
+  let { postDetails } = await postDetailsAction(pid);
+  // let similarPostsPromise = similarPostAction(pid);
   let blurData = await getBase64(postDetails?.picture?.secure_url);
   let blurDataAuthor = await getBase64(postDetails?.user?.picture?.secure_url);
-
   let like = await likeStatusAction(pid);
   let subLikeAction = likeAction.bind(null, pid);
-
-  let res = await fetch(
-    `${process.env.BASE_URL}/api/user/all-comments?pid=${pid}`
-    // {
-    //   cache: "force-cache",
-    // }
-  );
-  let data = await res.json();
 
   return (
     <div>
@@ -190,23 +185,18 @@ const PostDetails = async ({ params }) => {
         </div>
         <hr />
         <div className=" ">
-          <h4 className=" ms-3">
-            Comments about this post ({data?.plainComments?.length}){" "}
-          </h4>
-
           <div>
-            <NestedComments allComments={data?.comments} pid={pid} />
+            <Suspense fallback={<h2>Loading comments</h2>}>
+              <NestedCommentData pid={pid} />
+            </Suspense>
           </div>
         </div>
         <hr />
         <div className=" mb-4">
-          <h4>Similar posts</h4>
-          <div className="grid md:grid-cols-4 gap-3">
-            {similarPosts?.length &&
-              similarPosts?.map((item) => (
-                <PostCard key={item._id} item={item} />
-              ))}
-          </div>
+          <Suspense fallback={<h2>Loading similar</h2>}>
+            <SimilarPosts pid={pid} />
+            {/* <SimilarPosts similarPostsPromise={similarPostsPromise} /> */}
+          </Suspense>
         </div>
       </div>
     </div>

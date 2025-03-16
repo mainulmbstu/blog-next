@@ -6,11 +6,11 @@ import React, { useState } from "react";
 import CommentModal from "./commentModal";
 import Image from "next/image";
 
-const NestedComments = ({ pid, allComments }) => {
+const NestedComments = ({ pid, data }) => {
   const [parentId, setParentId] = useState("");
   const [page, setPage] = useState(1);
 
-  let comments = allComments?.slice(0, page * 5);
+  let comments = data?.comments?.slice(0, page * 5);
 
   let nestedComments = (comments) => {
     let commList = [];
@@ -61,9 +61,12 @@ const NestedComments = ({ pid, allComments }) => {
   };
   return (
     <div>
+      <h4 className=" ms-3">
+        Comments about this post ({data?.plainComments?.length}){" "}
+      </h4>
       {nestedComments(comments)}
       <button
-        disabled={comments?.length === allComments?.length}
+        disabled={comments?.length === data?.comments?.length}
         className="btn btn-accent"
         onClick={() => setPage((prev) => prev + 1)}
       >
