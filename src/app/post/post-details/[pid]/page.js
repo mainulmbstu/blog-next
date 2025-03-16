@@ -193,7 +193,7 @@ const PostDetails = async ({ params }) => {
         </div>
         <hr />
         <div className=" mb-4">
-          <Suspense fallback={<h2>Loading similar</h2>}>
+          <Suspense fallback={<h2>Loading similar posts</h2>}>
             <SimilarPosts pid={pid} />
             {/* <SimilarPosts similarPostsPromise={similarPostsPromise} /> */}
           </Suspense>
