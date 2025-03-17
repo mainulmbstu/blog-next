@@ -127,14 +127,14 @@ const NavMenu = () => {
                     <Image
                       priority={true}
                       width={400}
-                      height={404}
+                      height={400}
                       src={
                         userInfo?.picture
                           ? userInfo?.picture?.secure_url
                           : "/dummy.jpeg"
                       }
                       alt="image"
-                      className=" rounded-full w-12 object-contain"
+                      className=" rounded-full w-8 h-8 object-contain"
                     />
                     {userInfo?.name}
                     <IoIosArrowDown
