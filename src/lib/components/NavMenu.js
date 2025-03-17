@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { FaBars } from "react-icons/fa";
 import { CgCloseR } from "react-icons/cg";
@@ -11,20 +11,35 @@ import Image from "next/image";
 import Cookies from "js-cookie";
 import { category } from "../helpers/categoryData";
 import slugify from "slugify";
+import { useTheme } from "next-themes";
+import { FaMoon } from "react-icons/fa";
+import { GoSun } from "react-icons/go";
 
 const NavMenu = () => {
   const [isMenuOpen, setisMenuOpen] = useState(false);
   const [drop1, setdrop1] = useState(false);
   const [drop2, setdrop2] = useState(false);
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   let menuClose = () => setisMenuOpen(false);
   let { userInfo, setUserInfo, setToken } = useAuth();
   let router = useRouter();
   let path = usePathname();
 
+  if (!mounted) {
+    return null;
+  }
+
   return (
     <div className="fixed top-0 w-full z-10 shadow-lg flex  justify-between md:items-center p-4  bg-base-300">
-      <div className="">logo</div>
+      <div className="">
+        <Link href="/">logo</Link>
+      </div>
       <div
         className={`h-6  transition-all  duration-500 ${
           isMenuOpen ? "h-60 flex-1" : ""
@@ -194,6 +209,14 @@ const NavMenu = () => {
             )}
           </ul>
         </nav>
+      </div>
+      <div className="me-5 text-lg">
+        <button
+          className=" cursor-pointer"
+          onClick={() => setTheme(theme == "light" ? "dark" : "light")}
+        >
+          {theme == "light" ? <FaMoon /> : <GoSun />}
+        </button>
       </div>
       <div className="md:hidden cursor-pointer">
         <span onClick={() => setisMenuOpen(!isMenuOpen)}>

@@ -6,6 +6,7 @@ import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "@/lib/components/context";
 import Footer from "@/lib/components/Footer";
 import NavMenu from "@/lib/components/NavMenu";
+import { ThemeProvider } from "next-themes";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +28,7 @@ export const metadata = {
 };
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <meta charSet="UTF-8" />
         <link
@@ -42,38 +43,40 @@ export default function RootLayout({ children }) {
           suppressHydrationWarning={true}
           className={`${geistSans.variable} ${geistMono.variable} min-h-screen`}
         >
-          <Toaster
-            position="top-right"
-            toastOptions={{
-              className: "",
-              duration: 5000,
-              style: {
-                minWidth: "100px",
-                color: "#fff",
-              },
-              success: {
+          <ThemeProvider defaultTheme="system">
+            <Toaster
+              position="top-right"
+              toastOptions={{
+                className: "",
+                duration: 5000,
                 style: {
-                  background: "green",
                   minWidth: "100px",
+                  color: "#fff",
                 },
-              },
-              error: {
-                style: {
-                  background: "#df5d5d",
-                  minWidth: "100px",
+                success: {
+                  style: {
+                    background: "green",
+                    minWidth: "100px",
+                  },
                 },
-              },
-            }}
-          />
-          {/* <Navbar /> */}
-          <NavMenu />
-          <Offline />
-          <div className="pt-16  flex  flex-col min-h-[100vh]">
-            <div>{children}</div>
-            <div className=" mt-auto">
-              <Footer />
+                error: {
+                  style: {
+                    background: "#df5d5d",
+                    minWidth: "100px",
+                  },
+                },
+              }}
+            />
+            {/* <Navbar /> */}
+            <NavMenu />
+            <Offline />
+            <div className="pt-16  flex  flex-col min-h-[100vh]">
+              <div>{children}</div>
+              <div className=" mt-auto">
+                <Footer />
+              </div>
             </div>
-          </div>
+          </ThemeProvider>
         </body>
       </AuthProvider>
     </html>

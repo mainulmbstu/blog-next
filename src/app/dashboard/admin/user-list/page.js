@@ -16,22 +16,19 @@ const Users = async ({ searchParams }) => {
   let spms = await searchParams;
   let keyword = (await spms["keyword"]) ?? "";
   let page = Number((await spms["page"]) ?? "1");
-  let perPage = Number((await spms["perPage"]) ?? "30");
+  let perPage = Number((await spms["perPage"]) ?? "12");
   // let start=(Number(page)-1)*Number(perPage)
-  let start = (page - 1) * perPage;
-  let end = page * perPage;
 
   // let userList = await userListAction(keyword);
   let res = await fetch(
-    `${process.env.BASE_URL}/api/admin/user-list?keyword=${keyword}`,
+    `${process.env.BASE_URL}/api/admin/user-list?keyword=${keyword}&page=${page}&perPage=${perPage}`,
     {
       cache: "force-cache",
     }
   );
-  let userList = await res.json();
+  let data = await res.json();
   // let { data } = await axios.get(`https://jsonplaceholder.typicode.com/posts`);
-  let totalPage = Math.ceil(userList?.length / perPage);
-  let entries = userList?.slice(start, end);
+  let entries = data?.userList;
   return (
     <div>
       <div className="my-3">
@@ -109,7 +106,7 @@ const Users = async ({ searchParams }) => {
       </div>
       <div className=" mt-3 ">
         <Pagination
-          totalPage={totalPage}
+          total={data?.total}
           page={page}
           perPage={perPage}
           spms1="keyword"

@@ -4,9 +4,22 @@ import { UserModel } from "@/lib/models/userModel";
 
 export async function GET(req) {
   let keyword = req.nextUrl.searchParams.get("keyword");
+  let page = req.nextUrl.searchParams.get("page");
+  let perPage = req.nextUrl.searchParams.get("perPage");
+  let skip = (page - 1) * perPage;
 
   try {
     await dbConnect();
+    const total = await UserModel.find(
+      {
+        $or: [
+          { email: { $regex: keyword, $options: "i" } },
+          { name: { $regex: keyword, $options: "i" } },
+        ],
+      },
+      { password: 0 }
+    );
+
     const userList = await UserModel.find(
       {
         $or: [
@@ -15,9 +28,12 @@ export async function GET(req) {
         ],
       },
       { password: 0 }
-    ).sort({ createdAt: -1 });
+    )
+      .skip(skip)
+      .limit(perPage)
+      .sort({ createdAt: -1 });
 
-    return Response.json(userList);
+    return Response.json({ userList, total: total?.length });
   } catch (error) {
     console.log(error);
     return { message: await getErrorMessage(error) };
