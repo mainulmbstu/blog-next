@@ -4,13 +4,10 @@ import Link from "next/link";
 import { ImProfile } from "react-icons/im";
 import { PiUserListFill } from "react-icons/pi";
 import { FaListOl } from "react-icons/fa";
-import { MdOutlineAddBusiness } from "react-icons/md";
-import { MdAllInclusive } from "react-icons/md";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const AdminMenu = () => {
   let path = usePathname();
-  let router = useRouter();
   let menus = [
     {
       name: "profile",
@@ -26,16 +23,6 @@ const AdminMenu = () => {
       name: "My Blogs",
       href: "/dashboard/admin/my-blogs",
       icon: <FaListOl />,
-    },
-    {
-      name: "Add Blog",
-      href: "/dashboard/admin/add-blog",
-      icon: <MdOutlineAddBusiness />,
-    },
-    {
-      name: "All Blogs",
-      href: "/dashboard/admin/all-blogs",
-      icon: <MdAllInclusive />,
     },
   ];
 
