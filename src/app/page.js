@@ -49,7 +49,7 @@ const Home = async ({ searchParams }) => {
 
   return (
     <Suspense fallback=<Skeleton />>
-      <Page1 keyword={keyword} page={page} perPage={perPage} />
+      <Page1 searchParams={searchParams} />
     </Suspense>
     // <div className="p-2">
     //   <div>

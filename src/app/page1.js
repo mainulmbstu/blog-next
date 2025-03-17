@@ -8,11 +8,11 @@ import { Axios } from "@/lib/helpers/AxiosInstance";
 import { allPostAction } from "./(backend)/api/user/all-posts/allPostAction";
 import Loadmore from "@/lib/components/Loadmore";
 
-const Page1 = async ({ keyword, page, perPage }) => {
-  //   let spms = await searchParams;
-  //   let keyword = (await spms["keyword"]) ?? "";
-  //   let page = Number((await spms["page"]) ?? "1");
-  //   let perPage = Number((await spms["perPage"]) ?? "3");
+const Page1 = async ({ searchParams }) => {
+  let spms = await searchParams;
+  let keyword = (await spms["keyword"]) ?? "";
+  let page = Number((await spms["page"]) ?? "1");
+  let perPage = Number((await spms["perPage"]) ?? "3");
   // let start=(Number(page)-1)*Number(perPage)
   // let start = (page - 1) * perPage;
   // let end = page * perPage;
